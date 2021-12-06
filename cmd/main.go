@@ -11,6 +11,7 @@ import (
 	"github.com/comfortablynull/aoc2021go/internal/day/day3"
 	"github.com/comfortablynull/aoc2021go/internal/day/day4"
 	"github.com/comfortablynull/aoc2021go/internal/day/day5"
+	"github.com/comfortablynull/aoc2021go/internal/day/day6"
 	"github.com/google/subcommands"
 )
 
@@ -23,6 +24,7 @@ func main() {
 	subcommands.Register(newCmd("three", &day3.Runner{}), "days")
 	subcommands.Register(newCmd("four", day.Func(day4.Run)), "days")
 	subcommands.Register(newCmd("five", day.Func(day5.Run)), "days")
+	subcommands.Register(newCmd("six", day.Func(day6.Run)), "days")
 	flag.Parse()
 	ctx := context.Background()
 	os.Exit(int(subcommands.Execute(ctx)))
