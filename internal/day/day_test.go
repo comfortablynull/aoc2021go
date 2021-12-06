@@ -8,6 +8,7 @@ import (
 	"github.com/comfortablynull/aoc2021go/internal/day/day1"
 	"github.com/comfortablynull/aoc2021go/internal/day/day2"
 	"github.com/comfortablynull/aoc2021go/internal/day/day3"
+	"github.com/comfortablynull/aoc2021go/internal/day/day4"
 )
 
 func TestDay(t *testing.T) {
@@ -34,6 +35,12 @@ func TestDay(t *testing.T) {
 			one:   198,
 			two:   230,
 			day:   &day3.Runner{},
+		},
+		{
+			label: "four",
+			one:   4512,
+			two:   1924,
+			day:   Func(day4.Run),
 		},
 	}
 	for _, tc := range tests {
