@@ -8,13 +8,7 @@ import (
 
 func Run(r io.ReadSeeker) (int, int, error) {
 	first := 0
-	scanner := reader.NewScanner[[]int](r, reader.NewDecoder(reader.NewBasicParser(func(s string) ([]int, error) {
-		m := make([]int, len(s))
-		for k := range s {
-			m[k] = int(s[k] - '0')
-		}
-		return m, nil
-	})))
+	scanner := reader.NewScanner[[]int](r, reader.NewQuickIntSliceDecoder())
 	var grid [][]int
 	for scanner.Scan() {
 		row, err := scanner.Result()

@@ -88,3 +88,13 @@ func NewStringDecoder() Decoder[string] {
 		return s, nil
 	}))
 }
+
+func NewQuickIntSliceDecoder() Decoder[[]int] {
+	return NewDecoder[[]int](NewBasicParser[[]int](func(s string) ([]int, error) {
+		m := make([]int, len(s))
+		for k := range s {
+			m[k] = int(s[k] - '0')
+		}
+		return m, nil
+	}))
+}
