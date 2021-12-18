@@ -6,19 +6,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/comfortablynull/aoc2021go/internal/day/day1"
-	"github.com/comfortablynull/aoc2021go/internal/day/day10"
-	"github.com/comfortablynull/aoc2021go/internal/day/day11"
-	"github.com/comfortablynull/aoc2021go/internal/day/day12"
-	"github.com/comfortablynull/aoc2021go/internal/day/day13"
-	"github.com/comfortablynull/aoc2021go/internal/day/day2"
-	"github.com/comfortablynull/aoc2021go/internal/day/day3"
-	"github.com/comfortablynull/aoc2021go/internal/day/day4"
-	"github.com/comfortablynull/aoc2021go/internal/day/day5"
-	"github.com/comfortablynull/aoc2021go/internal/day/day6"
-	"github.com/comfortablynull/aoc2021go/internal/day/day7"
-	"github.com/comfortablynull/aoc2021go/internal/day/day8"
-	"github.com/comfortablynull/aoc2021go/internal/day/day9"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -56,91 +43,104 @@ func TestDay(t *testing.T) {
 			TestCase: testcase[int, int]{
 				one: 7,
 				two: 5,
-				day: Func[int, int](day1.Run)},
+				day: One(),
+			},
 		},
 		{
 			label: "2",
 			TestCase: testcase[int, int]{
 				one: 150,
 				two: 900,
-				day: Func[int, int](day2.Run)},
+				day: Two(),
+			},
 		},
 		{
 			label: "3",
 			TestCase: testcase[int, int]{
 				one: 198,
 				two: 230,
-				day: &day3.Runner{}},
+				day: Three(),
+			},
 		},
 		{
 			label: "4",
 			TestCase: testcase[int, int]{
 				one: 4512,
 				two: 1924,
-				day: Func[int, int](day4.Run)},
+				day: Four(),
+			},
 		},
 		{
 			label: "5",
 			TestCase: testcase[int, int]{
 				one: 5,
 				two: 12,
-				day: Func[int, int](day5.Run)},
+				day: Five(),
+			},
 		},
 		{
 			label: "6",
 			TestCase: testcase[int, int]{
 				one: 5934,
 				two: 26984457539,
-				day: Func[int, int](day6.Run)},
+				day: Six(),
+			},
 		},
 		{
 			label: "7",
 			TestCase: testcase[int, int]{
 				one: 37,
 				two: 168,
-				day: Func[int, int](day7.Run)},
+				day: Seven(),
+			},
 		},
 		{
 			label: "8",
 			TestCase: testcase[int, int]{
 				one: 26,
 				two: 61229,
-				day: Func[int, int](day8.Run)},
+				day: Eight(),
+			},
 		},
 		{
 			label: "9",
 			TestCase: testcase[int, int]{
 				one: 15,
 				two: 1134,
-				day: Func[int, int](day9.Run)},
+				day: Nine(),
+			},
 		},
 		{
 			label: "10",
 			TestCase: testcase[int, int]{
 				one: 26397,
 				two: 288957,
-				day: Func[int, int](day10.Run)},
+				day: Ten(),
+			},
 		},
 		{
 			label: "11",
 			TestCase: testcase[int, int]{
 				one: 1656,
 				two: 195,
-				day: Func[int, int](day11.Run)},
+				day: Eleven(),
+			},
 		},
 		{
 			label: "12",
 			TestCase: testcase[int, int]{
 				one: 226,
 				two: 3509,
-				day: Func[int, int](day12.Run)},
+				day: Twelve(),
+			},
 		},
 		{
 			label: "13",
 			TestCase: testcase[int, string]{
 				one: 17,
 				two: "#####\n#...#\n#...#\n#...#\n#####\n.....\n.....",
-				day: Func[int, string](day13.Run)},
+				day: Thirteen(),
+			},
 		},
 	}
 	for _, tc := range tests {
