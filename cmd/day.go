@@ -11,30 +11,30 @@ import (
 	"github.com/google/subcommands"
 )
 
-type cmd struct {
+type cmd[T, U any] struct {
 	name string
-	day  day.Day
+	day  day.Day[T, U]
 }
 
-func newCmd(name string, day day.Day) cmd {
-	return cmd{name: name, day: day}
+func newCmd[T, U any](name string, day day.Day[T, U]) cmd[T, U] {
+	return cmd[T, U]{name: name, day: day}
 }
 
-func (c cmd) Name() string {
+func (c cmd[T, U]) Name() string {
 	return c.name
 }
 
-func (c cmd) Synopsis() string {
+func (c cmd[T, U]) Synopsis() string {
 	return fmt.Sprintf("runs day %s", c.Name())
 }
 
-func (c cmd) Usage() string {
+func (c cmd[T, U]) Usage() string {
 	return fmt.Sprintf("%s <file>", c.Name())
 }
 
-func (c cmd) SetFlags(set *flag.FlagSet) {}
+func (c cmd[T, U]) SetFlags(set *flag.FlagSet) {}
 
-func (c cmd) Execute(ctx context.Context, f *flag.FlagSet, args ...interface{}) subcommands.ExitStatus {
+func (c cmd[T, U]) Execute(ctx context.Context, f *flag.FlagSet, args ...interface{}) subcommands.ExitStatus {
 	if len(f.Args()) != 1 {
 		return subcommands.ExitUsageError
 	}
@@ -53,6 +53,6 @@ func (c cmd) Execute(ctx context.Context, f *flag.FlagSet, args ...interface{}) 
 		fmt.Println(err)
 		return subcommands.ExitFailure
 	}
-	fmt.Printf("First: %v, Second: %v\n", first, second)
+	fmt.Printf("First:\n%v\nSecond:\n%v\n", first, second)
 	return subcommands.ExitSuccess
 }

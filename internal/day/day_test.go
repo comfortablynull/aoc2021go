@@ -2,6 +2,7 @@ package day
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"testing"
 
@@ -17,86 +18,121 @@ import (
 	"github.com/comfortablynull/aoc2021go/internal/day/day7"
 	"github.com/comfortablynull/aoc2021go/internal/day/day8"
 	"github.com/comfortablynull/aoc2021go/internal/day/day9"
+	"github.com/google/go-cmp/cmp"
 )
+
+type TestCase interface {
+	Run(t *testing.T, f io.ReadSeeker)
+}
+
+type testcase[T, U comparable] struct {
+	one T
+	two U
+	day Day[T, U]
+}
+
+func (tc testcase[T, U]) Run(t *testing.T, f io.ReadSeeker) {
+	one, two, err := tc.day.Run(f)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if diff := cmp.Diff(tc.one, one); diff != "" {
+		t.Errorf("One Wrong:\n%v", diff)
+	}
+	if diff := cmp.Diff(tc.two, two); diff != "" {
+		t.Errorf("Two wrong:\n%v", diff)
+	}
+}
 
 func TestDay(t *testing.T) {
 	type test struct {
-		label    string
-		one, two int
-		day      Day
+		label string
+		TestCase
 	}
 	tests := []test{
 		{
 			label: "1",
-			one:   7,
-			two:   5,
-			day:   Func(day1.Run),
+			TestCase: testcase[int, int]{
+				one: 7,
+				two: 5,
+				day: Func[int, int](day1.Run)},
 		},
 		{
 			label: "2",
-			one:   150,
-			two:   900,
-			day:   Func(day2.Run),
+			TestCase: testcase[int, int]{
+				one: 150,
+				two: 900,
+				day: Func[int, int](day2.Run)},
 		},
 		{
 			label: "3",
-			one:   198,
-			two:   230,
-			day:   &day3.Runner{},
+			TestCase: testcase[int, int]{
+				one: 198,
+				two: 230,
+				day: &day3.Runner{}},
 		},
 		{
 			label: "4",
-			one:   4512,
-			two:   1924,
-			day:   Func(day4.Run),
+			TestCase: testcase[int, int]{
+				one: 4512,
+				two: 1924,
+				day: Func[int, int](day4.Run)},
 		},
 		{
 			label: "5",
-			one:   5,
-			two:   12,
-			day:   Func(day5.Run),
+			TestCase: testcase[int, int]{
+				one: 5,
+				two: 12,
+				day: Func[int, int](day5.Run)},
 		},
 		{
 			label: "6",
-			one:   5934,
-			two:   26984457539,
-			day:   Func(day6.Run),
+			TestCase: testcase[int, int]{
+				one: 5934,
+				two: 26984457539,
+				day: Func[int, int](day6.Run)},
 		},
 		{
 			label: "7",
-			one:   37,
-			two:   168,
-			day:   Func(day7.Run),
+			TestCase: testcase[int, int]{
+				one: 37,
+				two: 168,
+				day: Func[int, int](day7.Run)},
 		},
 		{
 			label: "8",
-			one:   26,
-			two:   61229,
-			day:   Func(day8.Run),
+			TestCase: testcase[int, int]{
+				one: 26,
+				two: 61229,
+				day: Func[int, int](day8.Run)},
 		},
 		{
 			label: "9",
-			one:   15,
-			two:   1134,
-			day:   Func(day9.Run),
+			TestCase: testcase[int, int]{
+				one: 15,
+				two: 1134,
+				day: Func[int, int](day9.Run)},
 		},
 		{
 			label: "10",
-			one:   26397,
-			two:   288957,
-			day:   Func(day10.Run),
+			TestCase: testcase[int, int]{
+				one: 26397,
+				two: 288957,
+				day: Func[int, int](day10.Run)},
 		},
 		{
 			label: "11",
-			one:   1656,
-			two:   195,
-			day:   Func(day11.Run),
+			TestCase: testcase[int, int]{
+				one: 1656,
+				two: 195,
+				day: Func[int, int](day11.Run)},
 		},
 		{
 			label: "12",
-			one:   226,
-			two:   3509,
-			day:   Func(day12.Run),
+			TestCase: testcase[int, int]{
+				one: 226,
+				two: 3509,
+				day: Func[int, int](day12.Run)},
 		},
 	}
 	for _, tc := range tests {
@@ -106,16 +142,7 @@ func TestDay(t *testing.T) {
 				t.Fatal(err)
 			}
 			defer f.Close()
-			one, two, err := tc.day.Run(f)
-			if err != nil {
-				t.Fatal(err)
-			}
-			if one != tc.one {
-				t.Errorf("One wrong: expected: %v got: %v", tc.one, one)
-			}
-			if two != tc.two {
-				t.Errorf("Two wrong: expected: %v got: %v", tc.two, two)
-			}
+			tc.Run(t, f)
 		})
 	}
 }

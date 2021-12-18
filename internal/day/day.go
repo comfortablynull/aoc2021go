@@ -2,10 +2,10 @@ package day
 
 import "io"
 
-type Day interface {
-	Run(r io.ReadSeeker) (int, int, error)
+type Day[T, U any] interface {
+	Run(r io.ReadSeeker) (T, U, error)
 }
 
-type Func func(r io.ReadSeeker) (int, int, error)
+type Func[T, U any] func(r io.ReadSeeker) (T, U, error)
 
-func (f Func) Run(r io.ReadSeeker) (int, int, error) { return f(r) }
+func (f Func[T, U]) Run(r io.ReadSeeker) (T, U, error) { return f(r) }
