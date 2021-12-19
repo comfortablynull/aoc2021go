@@ -26,6 +26,7 @@ func main() {
 	subcommands.Register(newCmd[int, int]("11", day.Eleven()), "days")
 	subcommands.Register(newCmd[int, int]("12", day.Twelve()), "days")
 	subcommands.Register(newCmd[int, string]("13", day.Thirteen()), "days")
+	subcommands.Register(newCmd[int, int]("14", day.Fourteen()), "days")
 	flag.Parse()
 	ctx := context.Background()
 	os.Exit(int(subcommands.Execute(ctx)))

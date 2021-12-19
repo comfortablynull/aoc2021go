@@ -8,6 +8,7 @@ import (
 	"github.com/comfortablynull/aoc2021go/internal/day/day11"
 	"github.com/comfortablynull/aoc2021go/internal/day/day12"
 	"github.com/comfortablynull/aoc2021go/internal/day/day13"
+	"github.com/comfortablynull/aoc2021go/internal/day/day14"
 	"github.com/comfortablynull/aoc2021go/internal/day/day2"
 	"github.com/comfortablynull/aoc2021go/internal/day/day3"
 	"github.com/comfortablynull/aoc2021go/internal/day/day4"
@@ -64,4 +65,7 @@ func Twelve() Day[int, int] {
 }
 func Thirteen() Day[int, string] {
 	return Func[int, string](day13.Run)
+}
+func Fourteen() Day[int, int] {
+	return Func[int, int](day14.Run)
 }

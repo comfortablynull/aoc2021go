@@ -141,6 +141,13 @@ func TestDay(t *testing.T) {
 				two: "#####\n#...#\n#...#\n#...#\n#####\n.....\n.....",
 				day: Thirteen(),
 			},
+		}, {
+			label: "14",
+			TestCase: testcase[int, int]{
+				one: 1588,
+				two: 2188189693529,
+				day: Fourteen(),
+			},
 		},
 	}
 	for _, tc := range tests {
